@@ -3,10 +3,28 @@ package com.wanna.exspinner;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private String[] type = new String[] {"新北市", "臺北市","基隆市"};
@@ -18,15 +36,24 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayAdapter<String> adapter ;
     ArrayAdapter<String> adapter2;
+
+    //------------------------------------------------------------------
+    ArrayList<Map<String,Object>> mylist=new ArrayList();
+    Spinner spMap,spMap2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //InputStreamReader inputStreamReader;
+
+
+
         context = this;
 
         //程式剛啟始時載入第一個下拉選單
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, type);
+        adapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_spinner_item, type);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp = (Spinner) findViewById(R.id.type);
         sp.setAdapter(adapter);
@@ -37,6 +64,17 @@ public class MainActivity extends AppCompatActivity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp2 = (Spinner) findViewById(R.id.type2);
         sp2.setAdapter(adapter2);
+
+
+        //-----------------------------------------------------------------------------------------
+        spMap=(Spinner)findViewById(R.id.spinner);
+        spMap=(Spinner)findViewById(R.id.spinner2);
+        HashMap<String,Object> m1 = new HashMap<>();
+        m1.put("city","台北");
+        m1.put("code","02");
+        mylist.add(m1);
+
+
     }
 
     //第一個下拉類別的監看式
@@ -55,4 +93,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
     };
+
+
+    public void click1(View v)
+    {
+
+    }
+
+
+
 }
